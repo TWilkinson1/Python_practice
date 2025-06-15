@@ -12,6 +12,9 @@ def parse_log_line(line):
         return data
     return None
 
-def read_log_file():
+def read_log_file(filepath):
+    with open(filepath, 'r') as f: 
+        return [parse_log_line(line) for line in f if parse_log_line(line) is not None]
 
-def summarise_log()
+
+def summarise_log(logs)
