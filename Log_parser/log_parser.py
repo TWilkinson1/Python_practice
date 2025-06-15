@@ -1,4 +1,5 @@
 import re
+
 from collections import Counter
 from datetime import datetime
 
@@ -17,4 +18,22 @@ def read_log_file(filepath):
         return [parse_log_line(line) for line in f if parse_log_line(line) is not None]
 
 
-def summarise_log(logs)
+def summarise_log(logs):
+    ip_counter = Counter(log['ip'] for log in logs)
+    status_counter = Counter(log['status'] for log in logs)
+
+    print("Top 5 IP addresses:")
+    for ip, count in ip_counter.most_common(5):
+        print(f"{ip}: {count} requests")
+
+    print("\nStatus code summary:")
+    for status, count in status_counter.items():
+        print(f"{status}: {count} occurrences")
+
+
+if __name__ == "__main__":
+    logs = read_log_file('access.log')
+    if logs:
+        summarise_log(logs)
+    else:
+        print("No valid log entries found.")
