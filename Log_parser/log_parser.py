@@ -2,7 +2,7 @@ import re
 from collections import Counter
 from datetime import datetime
 
-LOG_PATTERN = re.compile(r'(?P<ip>\S+) \S+ \[(?P<timestamp>[^\]]+)\]" (?P<method>\S+) (?P<url>\S+) \S+" (?P<status>\d{3}) (?P<size>\d+)')
+LOG_PATTERN = re.compile(r'(?P<ip>\S+) \S+ \S+ \[(?P<timestamp>[^\]]+)\] "(?P<method>\S+) (?P<url>\S+) \S+" (?P<status>\d{3}) (?P<size>\d+)')
 
 def parse_log_line(line):
     match = LOG_PATTERN.match(line)
