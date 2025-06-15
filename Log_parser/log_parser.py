@@ -1,6 +1,9 @@
 import re
+import matplotlib.pyplot as plt
 from collections import Counter
 from datetime import datetime
+
+
 
 LOG_PATTERN = re.compile(r'(?P<ip>\S+) \S+ \S+ \[(?P<timestamp>[^\]]+)\] "(?P<method>\S+) (?P<url>\S+) \S+" (?P<status>\d{3}) (?P<size>\d+)')
 
@@ -41,3 +44,12 @@ if __name__ == "__main__":
         summarise_log(logs)
     else:
         print("No valid log entries found.")
+
+def plot_status_codes(logs):
+    status_counter = Counter(log['status']for log in logs)
+    statuses, counts = zip(*status_counter.items())
+    plt.bar(statuses, counts)
+    plt.xlabel('Status Codes')
+    plt.ylabel('Number of Requests')
+    plt.title('HTTP Status Codes Distribution')
+    plt.show()
